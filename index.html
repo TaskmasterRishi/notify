@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notify</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <h1>Notify</h1>
+    <div class="main">
+        <form id="notesForm" class="notes-form">
+            <div class="info">
+                <label for="title">
+                    <h2>Enter Title</h2>
+                </label>
+                <input type="text" id="title" placeholder="Title" />
+            </div>
+            <div class="info">
+                <label for="description">
+                    <h2>Enter Discription</h2>
+                </label>
+                <textarea name="discription" id="discription" rows="20" cols="50"></textarea>
+            </div>
+            <input type="submit">
+        </form>
+        <div class="showNotes" id="showNotes">
+            <div class="note" id="note">
+                <h2 id="noteTitle" class="noteTitle"></h2>
+                <h4 id="noteDiscription" class="noteDiscription"></h4>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="main.js"></script>
+
+</html>
