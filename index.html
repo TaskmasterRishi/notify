@@ -7,6 +7,10 @@
     <title>Notify</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
     <link rel="stylesheet" href="media.css">
     <link rel="icon" href="img/notify.png">
 </head>
@@ -51,13 +55,17 @@
                 <label for="description">
                     <h2>Enter Discription</h2>
                 </label>
-                <textarea name="description" id="description" rows="10" cols="50"></textarea>
+                <textarea name="description" id="description" rows="5" cols="50"></textarea>
             </div>
-            <button type="submit" class="sbtbtn"> Add Note</button>
+            <button type="submit" class="sbtbtn" id="submitButton"> Add Note</button>
         </form>
 
+        <div class="heading" id="heading">
+        <h1 >Your Notes</h1><hr>
+    </div>
+
         <div class="showNotes" id="showNotes">
-           
+            
         </div>
 
     </div>
