@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="media.css">
+    <link rel="icon" href="img/notify.png">
 </head>
 
 <body>
-
     <nav>
         <div class="menu-icon">
             <span class="fas fa-bars"></span>
@@ -38,6 +38,7 @@
             <button type="submit" class="fas fa-search"></button>
         </form>
     </nav>
+
     <div class="main">
         <form id="notesForm" class="notes-form">
             <div class="info">
@@ -50,16 +51,15 @@
                 <label for="description">
                     <h2>Enter Discription</h2>
                 </label>
-                <textarea name="discription" id="discription" rows="20" cols="50"></textarea>
+                <textarea name="description" id="description" rows="10" cols="50"></textarea>
             </div>
-            <input type="submit">
+            <button type="submit" class="sbtbtn"> Add Note</button>
         </form>
+
         <div class="showNotes" id="showNotes">
-            <div class="note" id="note">
-                <h2 id="noteTitle" class="noteTitle"></h2>
-                <h4 id="noteDiscription" class="noteDiscription"></h4>
-            </div>
+           
         </div>
+
     </div>
 </body>
 <script src="main.js"></script>

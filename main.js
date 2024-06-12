@@ -5,11 +5,11 @@ let noteForm = document.getElementById("notesForm");
 noteForm.addEventListener("submit", (e) => {
     e.preventDefault();
     let title = document.getElementById("title").value;
-    let discription = document.getElementById("discription").value;
+    let description = document.getElementById("description").value;
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
     notes.push({
         noteTitle: title,
-        noteDiscription: discription,
+        noteDescription: description,
         isPinned: false
     });
     localStorage.setItem("notes", JSON.stringify(notes));
@@ -18,9 +18,16 @@ noteForm.addEventListener("submit", (e) => {
 });
 
 function showNote() {
-    let notes = JSON.parse(localStorage.getItem("notes"))
+    let notes = JSON.parse(localStorage.getItem("notes")) || [];
+    let notesContainer = document.getElementById("showNotes");
+    notesContainer.innerHTML = "";
+
     notes.forEach((item) => {
-        document.getElementById("noteTitle").innerHTML += item.noteTitle;
-        document.getElementById("noteDiscription").innerHTML += item.noteDiscription;
+        notesContainer.innerHTML += `
+            <div class="note" id="note">
+                <h2 id="noteTitle" class="noteTitle">${item.noteTitle}</h2>
+                <p id="noteDescription" class="noteDescription">${item.noteDescription.replace(/\n/g, '<br>')}</p>
+            </div>
+        `;
     });
 }
