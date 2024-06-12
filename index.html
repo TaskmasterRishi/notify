@@ -5,11 +5,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notify</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="media.css">
 </head>
 
 <body>
-    <h1>Notify</h1>
+
+    <nav>
+        <div class="menu-icon">
+            <span class="fas fa-bars"></span>
+        </div>
+        <div class="logo">
+            <img src="img/notify.png" alt="Logo" width="50vw">
+            <h1>Notify</h1>
+        </div>
+        <!-- <div class="nav-items">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blogs</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Feedback</a></li>
+        </div> -->
+        <div class="search-icon">
+            <span class="fas fa-search"></span>
+        </div>
+        <div class="cancel-icon">
+            <span class="fas fa-times"></span>
+        </div>
+        <form action="#">
+            <input type="search" class="search-data" placeholder="Search" required>
+            <button type="submit" class="fas fa-search"></button>
+        </form>
+    </nav>
     <div class="main">
         <form id="notesForm" class="notes-form">
             <div class="info">
@@ -35,5 +63,6 @@
     </div>
 </body>
 <script src="main.js"></script>
+<script src="navbar.js"></script>
 
 </html>
