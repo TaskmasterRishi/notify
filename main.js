@@ -14,7 +14,7 @@ noteForm.addEventListener("submit", (e) => {
         notes[editIndex] = {
             noteTitle: title,
             noteDescription: description,
-            isPinned: false
+            isPinned: notes[editIndex].isPinned // Preserve the pin status
         };
         localStorage.removeItem("editIndex");
         editMode = false;
@@ -34,15 +34,17 @@ noteForm.addEventListener("submit", (e) => {
 
 function showNote() {
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
-    let notesContainer = document.getElementById("showNotes");
-    notesContainer.innerHTML = "";
-    toggleHeading(notes.length);
+    let pinnedNotesContainer = document.getElementById("showPinedNotes");
+    let allNotesContainer = document.getElementById("showNotes");
+    
+    pinnedNotesContainer.innerHTML = "";
+    allNotesContainer.innerHTML = "";
     
     notes.forEach((item, index) => {
-        notesContainer.innerHTML += `
+        let noteHTML = `
             <div class="note">
                 <ul class="noteBar">
-                    <li><i class="fa-regular fa-thumbtack icon pin"></i></li>
+                    <li><i class="fa-regular fa-thumbtack icon pin" onclick="pinNote(${index})" style="color: ${item.isPinned ? 'red' : 'black'}; transform : rotate(${item.isPinned ? '45deg ' : '0'})"></i></li>
                     <li><i class="fa-regular fa-pen-to-square icon edit" onclick="editNote(${index}, true)"></i></li>
                     <li><i class="fa-regular fa-trash icon delete" onclick="deleteNote(${index})"></i></li>
                 </ul>
@@ -50,7 +52,15 @@ function showNote() {
                 <p class="noteDescription">${item.noteDescription.replace(/\n/g, '<br>')}</p>
             </div>
         `;
+
+        if (item.isPinned) {
+            pinnedNotesContainer.innerHTML += noteHTML;
+        } else {
+            allNotesContainer.innerHTML += noteHTML;
+        }
     });
+
+    toggleHeading(notes.length);
 }
 
 function editNote(index, isEditMode) {
@@ -67,12 +77,26 @@ function editNote(index, isEditMode) {
 
 function deleteNote(index) {
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
-    notes.splice(index, 1); 
-    localStorage.setItem("notes", JSON.stringify(notes)); 
+    notes.splice(index, 1);
+    localStorage.setItem("notes", JSON.stringify(notes));
     showNote();
 }
 
+function pinNote(index) {
+    let notes = JSON.parse(localStorage.getItem("notes")) || [];
+    notes[index].isPinned = !notes[index].isPinned; 
+    localStorage.setItem("notes", JSON.stringify(notes));
+    showNote(); 
+}
+
 function toggleHeading(noteCount) {
-    let contentId = document.getElementById("heading");
-    contentId.style.display = noteCount > 0 ? "block" : "none";
+    let pinnedHeading = document.getElementById("pinnedHeading");
+    let unPinnedHeading = document.getElementById("unPinnedHeading");
+    
+    let notes = JSON.parse(localStorage.getItem("notes")) || [];
+    let pinnedNotes = notes.filter(note => note.isPinned);
+    let unPinnedNotes = notes.filter(note => !note.isPinned);
+    
+    pinnedHeading.style.display = pinnedNotes.length > 0 ? "block" : "none";
+    unPinnedHeading.style.display = unPinnedNotes.length > 0 ? "block" : "none";
 }

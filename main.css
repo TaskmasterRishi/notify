@@ -236,7 +236,7 @@ textarea {
     transition: 0.2s ease-in;
 }
 
-.showNotes {
+.showNotes ,.showPinedNotes{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
