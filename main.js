@@ -8,13 +8,13 @@ noteForm.addEventListener("submit", (e) => {
     let title = document.getElementById("title").value;
     let description = document.getElementById("description").value;
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
-    
+
     if (editMode) {
         let editIndex = localStorage.getItem("editIndex");
         notes[editIndex] = {
             noteTitle: title,
             noteDescription: description,
-            isPinned: notes[editIndex].isPinned // Preserve the pin status
+            isPinned: notes[editIndex].isPinned
         };
         localStorage.removeItem("editIndex");
         editMode = false;
@@ -26,7 +26,7 @@ noteForm.addEventListener("submit", (e) => {
             isPinned: false
         });
     }
-    
+
     localStorage.setItem("notes", JSON.stringify(notes));
     noteForm.reset();
     showNote();
@@ -34,12 +34,16 @@ noteForm.addEventListener("submit", (e) => {
 
 function showNote() {
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
+    displayNotes(notes);
+}
+
+function displayNotes(notes) {
     let pinnedNotesContainer = document.getElementById("showPinedNotes");
     let allNotesContainer = document.getElementById("showNotes");
-    
+
     pinnedNotesContainer.innerHTML = "";
     allNotesContainer.innerHTML = "";
-    
+
     notes.forEach((item, index) => {
         let noteHTML = `
             <div class="note">
@@ -73,6 +77,7 @@ function editNote(index, isEditMode) {
         document.getElementById("submitButton").innerText = "Update Note";
         localStorage.setItem("editIndex", index);
     }
+    window.scrollTo(0, 0);
 }
 
 function deleteNote(index) {
@@ -84,19 +89,35 @@ function deleteNote(index) {
 
 function pinNote(index) {
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
-    notes[index].isPinned = !notes[index].isPinned; 
+    notes[index].isPinned = !notes[index].isPinned;
     localStorage.setItem("notes", JSON.stringify(notes));
-    showNote(); 
+    showNote();
 }
 
 function toggleHeading(noteCount) {
     let pinnedHeading = document.getElementById("pinnedHeading");
     let unPinnedHeading = document.getElementById("unPinnedHeading");
-    
+
     let notes = JSON.parse(localStorage.getItem("notes")) || [];
     let pinnedNotes = notes.filter(note => note.isPinned);
     let unPinnedNotes = notes.filter(note => !note.isPinned);
-    
+
     pinnedHeading.style.display = pinnedNotes.length > 0 ? "block" : "none";
+    unPinnedHeading.querySelector("h1").innerHTML = pinnedNotes.length > 0 ? "Other Notes" : "All Notes";
     unPinnedHeading.style.display = unPinnedNotes.length > 0 ? "block" : "none";
 }
+
+let searchInput = document.getElementById("search");
+searchInput.addEventListener("input", () => {
+    let searchValue = searchInput.value.toLowerCase();
+    let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+    if (searchValue) {
+        let filteredNotes = notes.filter(note => {
+            return note.noteTitle.toLowerCase().includes(searchValue);
+        });
+        displayNotes(filteredNotes);
+    } else {
+        showNote();
+    }
+});
